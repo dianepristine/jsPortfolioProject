@@ -1,66 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tamagotchi Game</title>
 
-        <!-- Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamagotchi Game</title>
 
-        <!-- CSS Link -->
-        <link rel="stylesheet" href="css/tamagotchi.css" />
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
-    </head>
-    <body>
-        <div class="container text-center">
-            <!-- Intro to Game -->
-            <div class="intro">
-                <h1>Welcome to Bootleg Tamagotchi!</h1>
-                <p>How To Play:</p>
-                <ul>
-                    <li>Clean Pet: Keep your pet clean by clicking the "Clean" button.</li>
-                    <li>Feed Pet: Satisfy your pet's hunger by clicking the "Feed" button.</li>
-                    <li>Play with Pet: Make your pet happy by clicking the "Play" button.</li>
-                    <li>Put to Sleep: Ensure your pet gets enough rest by clicking the "Sleep" button.</li>
-                </ul>
-                <p>Be sure to check in on your pet regularly to keep it healthy and happy!</p>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="css/tamagotchi.css" />
+
+</head>
+
+<body>
+    <div class="container text-center">
+        <!-- Intro to Game -->
+        <div class="intro">
+            <h1>Welcome to Bootleg Tamagotchi!</h1>
+            <p>How To Play:</p>
+            <ul>
+                <li>Clean Pet: Keep your pet clean by clicking the "Clean" button.</li>
+                <li>Feed Pet: Satisfy your pet's hunger by clicking the "Feed" button.</li>
+                <li>Play with Pet: Make your pet happy by clicking the "Play" button.</li>
+                <li>Put to Sleep: Ensure your pet gets enough rest by clicking the "Sleep" button.</li>
+            </ul>
+            <p>Be sure to check in on your pet regularly to keep it healthy and happy!</p>
+        </div>
+
+        <!-- Tamagotchi UI Section -->
+        <div class="tamagotchi">
+            <!-- tamagotchi pet and function icons -->
+            <div class="row m-5">
+                <div class="col-6 text-center">
+                    <button type="button" class="btn btn-outline-info" id="feedButton" onclick="feedPet()">Feed</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-outline-info" id="playButton"
+                        onclick="playWithPet()">Play</button>
+                </div>
             </div>
-
-            <!-- Tamagotchi UI Section -->
-            <div class="tamagotchi">
-                <!-- tamagotchi pet and function icons -->
-                <div class="row m-5">
-                    <div class="col-6 text-center">
-                        <button type="button" class="btn btn-outline-info" id="feedButton" onclick="feedPet()">Feed</button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-outline-info" id="playButton" onclick="playWithPet()">Play</button>
-                    </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <img src="images/tamagotchi.png" alt="Icon of Tamagotchi Pet" class="img-fluid" />
                 </div>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img src="images/tamagotchi.png" alt="Icon of Tamagotchi Pet" class="img-fluid"/>
-                    </div>
+                <div id="pet-status">
+                    <p>Health: <span id="health">100</span></p>
+                    <p>Happiness: <span id="happiness">100</span></p>
                 </div>
-                <div class="row">
-                    <div class="col-6 text-center">
-                        <button type="button" class="btn btn-outline-info" id="cleanButton" onclick="cleanPet()">Clean</button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-outline-info" id="sleepButton" onclick="putToBed()">Put To Bed</button>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-center">
+                    <button type="button" class="btn btn-outline-info" id="cleanButton"
+                        onclick="cleanPet()">Clean</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-outline-info" id="sleepButton" onclick="putToBed()">Put To
+                        Bed</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap Link -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <!-- JS Script Links -->
+    <script src="js/clean.js"></script>
+    <script src="js/feed.js"></script>
+    <script src="js/play.js"></script>
+    <script src="js/sleep.js"></script>
 
-        <!-- JS Script Links -->
-        <script src="js/clean.js"></script>
-        <script src="js/feed.js"></script>
-        <script src="js/play.js"></script>
-        <script src="js/sleep.js"></script>
-    </body>
+    <!-- // link external JS scripts
+            // Global variables for timers? -->
+    <!-- Function to decrease health and happiness over time -->
+    <script>
+        // Function to update the UI with current pet status
+        function updateStatus() {
+            document.getElementById('health').textContent = health;
+            document.getElementById('happiness').textContent = happiness;
+        }
+
+        function decreaseStatusOverTime() {
+            health -= 5;
+            happiness -= 10;
+            if (health < 0) health = 0;
+            if (happiness < 0) happiness = 0;
+            updateStatus();
+        }
+
+        // Define global variables for pet status
+        let health = 100;
+        let happiness = 100;
+
+        // Initialize
+        updateStatus();
+
+        // Decrease health and happiness every 5 seconds
+        setInterval(decreaseStatusOverTime, 5000);
+
+    </script>
+    <!-- Bootstrap Link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
